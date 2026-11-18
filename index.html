@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Seguy Fotazou</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500;62..125,700;62..125,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Mise en page : colonne de lecture étroite, études de cas en « parcelles » numérotées, graphiques pleine largeur */
+  --bg:#F2F4EF; --surface:#FFFFFF; --ink:#17231C; --muted:#56645B; --line:#D6DDD4;
+  --accent:#1F4E3D; --accent-soft:#E2ECE5; --signal:#B23A2B; --amber:#D9922C; --blue:#3E7CB1; --mist:#AEB9B1;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1612; --surface:#16201A; --ink:#E6ECE6; --muted:#9BA9A0; --line:#27352D;
+  --accent:#7CC6A0; --accent-soft:#1B2E24; --signal:#E9705F; --amber:#E9AE52; --blue:#79AEDB; --mist:#4A5850; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0F1612; --surface:#16201A; --ink:#E6ECE6; --muted:#9BA9A0; --line:#27352D;
+  --accent:#7CC6A0; --accent-soft:#1B2E24; --signal:#E9705F; --amber:#E9AE52; --blue:#79AEDB; --mist:#4A5850; color-scheme:dark;}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+.num{font-variant-numeric:tabular-nums}
+
+/* En-tête */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.top .id{font-family:var(--display);font-weight:700;font-stretch:90%;font-size:18px;letter-spacing:.01em}
+.top nav{display:flex;gap:20px;flex-wrap:wrap;font-size:15px}
+.top nav a{color:var(--muted);text-decoration:none}
+.top nav a:hover{color:var(--ink)}
+
+/* Accroche */
+.hero{padding:72px 0 48px;display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:end}
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.hero h1{font-size:clamp(44px,7vw,84px);font-weight:800;font-stretch:72%;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lede{font-size:19px;color:var(--muted);max-width:34em;margin:22px 0 0}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--bg)}
+.btn.ghost{color:var(--accent)}
+.facts{display:grid;gap:0;border-top:2px solid var(--ink)}
+.fact{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
+.fact b{font-family:var(--display);font-stretch:75%;font-size:36px;font-weight:800;line-height:1}
+.fact span{color:var(--muted);font-size:15px;line-height:1.35}
+
+/* Sections */
+section.block{padding:56px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(30px,4vw,42px);font-weight:800;font-stretch:80%}
+.sec-head p{color:var(--muted);margin:0;max-width:36em}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.trio h3{font-size:21px;font-stretch:90%;font-weight:700;margin-bottom:8px}
+.trio p{margin:0;color:var(--muted);font-size:16px}
+
+/* Études de cas */
+.case{padding:56px 0;border-top:1px solid var(--line)}
+.plot{display:flex;gap:14px;align-items:center;font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+.plot .tag{border:1px solid var(--line);border-radius:4px;padding:2px 8px;color:var(--ink);background:var(--surface)}
+.plot .tag.feat{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.case h2{font-size:clamp(30px,4.4vw,48px);font-weight:800;font-stretch:76%;max-width:20em}
+.case .q{font-size:19px;color:var(--muted);max-width:40em;margin:16px 0 28px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:36px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px 22px 16px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.panel-head h3{font-family:var(--body);font-size:15px;font-weight:600;line-height:1.35}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;background:var(--bg)}
+.seg button{font:500 13px var(--body);border:0;background:transparent;color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+select{font:500 14px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:4px 0 6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+svg text{font-family:var(--body);fill:var(--muted)}
+svg .lab{fill:var(--ink)}
+.chart{width:100%;display:block}
+.src{font-size:12.5px;color:var(--muted);margin:10px 0 0;line-height:1.45}
+.side dl{margin:0;display:grid;gap:18px}
+.side dt{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.side dd{margin:0;font-size:15.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 12.5px var(--mono);border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:3px 8px}
+.finding{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.finding div{border-top:2px solid var(--accent);padding-top:12px}
+.finding b{display:block;font-family:var(--display);font-stretch:78%;font-size:30px;font-weight:800;line-height:1.05;margin-bottom:4px}
+.finding span{color:var(--muted);font-size:15px;line-height:1.4;display:block}
+details{margin-top:22px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+summary{cursor:pointer;padding:12px 16px;font-weight:600;font-size:15px}
+pre{margin:0;padding:0 16px 16px;overflow-x:auto;font:400 13px/1.55 var(--mono);color:var(--ink)}
+.arch{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch;margin-top:6px}
+.arch div{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:12px;font-size:14px;line-height:1.35;position:relative}
+.arch div b{display:block;font-family:var(--mono);font-size:11.5px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.arch div:not(:last-child)::after{content:"→";position:absolute;right:-10px;top:50%;transform:translate(50%,-50%);color:var(--muted);font-size:14px}
+.list{margin:0;padding-left:18px;font-size:15px}
+.list li{margin:4px 0}
+
+/* Parcours */
+.timeline{display:grid;gap:0;border-top:2px solid var(--ink)}
+.tl{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.tl .when{font:500 13.5px var(--mono);color:var(--muted);padding-top:3px}
+.tl h3{font-family:var(--body);font-size:17px;font-weight:600;line-height:1.3}
+.tl p{margin:4px 0 0;color:var(--muted);font-size:15.5px}
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 36px}
+.skills h3{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:500}
+.skills p{margin:0;font-size:15.5px}
+
+.contact{padding:64px 0 80px;border-top:2px solid var(--ink)}
+.contact h2{font-size:clamp(34px,5vw,56px);font-weight:800;font-stretch:72%}
+.contact p{color:var(--muted);max-width:38em}
+.addr{font:500 17px var(--mono);color:var(--ink);user-select:all}
+.copy{font:500 13px var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:10px}
+
+@media (max-width:860px){
+  .hero,.grid2{grid-template-columns:1fr}
+  .trio,.finding{grid-template-columns:1fr}
+  .skills{grid-template-columns:1fr}
+  .arch{grid-template-columns:1fr}
+  .arch div:not(:last-child)::after{content:"↓";right:50%;top:auto;bottom:-14px;transform:translateX(50%)}
+  .tl{grid-template-columns:1fr;gap:4px}
+  .hero{padding-top:44px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .bar{transition:width .45s ease, x .45s ease}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="id">Seguy Enock Fotazou, Agr., M.Sc.</div>
+    <nav aria-label="Sections">
+      <a href="#etudes">Études de cas</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">Analyste BI · Agronome membre de l'OAQ</p>
+      <h1>Des données du champ<br>aux <em>décisions</em> des gestionnaires.</h1>
+      <p class="lede">Sept ans à structurer et analyser des données de terrain (recherche agronomique, humanitaire, agroenvironnement), aujourd'hui en Power BI, DAX, SQL et Python. Chaque étude de cas ci-dessous part d'une question d'affaires, utilise des données publiques réelles et se termine par une décision qu'elle rend possible.</p>
+      <div class="cta">
+        <a class="btn primary" href="#etudes">Voir les études de cas</a>
+        <a class="btn ghost" href="https://seguy-fotazou.github.io/sillonia">Démo Sillonia</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/seguy-enock-agr-m-sc-b6339826">LinkedIn</a>
+      </div>
+    </div>
+    <div class="facts" aria-label="En bref">
+      <div class="fact"><b class="num">7+</b><span>années en gestion et analyse de données (ICRAF, CIRAD, Croix-Rouge, Ferti-Conseil)</span></div>
+      <div class="fact"><b class="num">4</b><span>études de cas sur données réelles : agronomie, emploi, construction, plateforme agro</span></div>
+      <div class="fact"><b>FR · EN</b><span>Québec, Chaudière-Appalaches, télétravail et mandats internationaux</span></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="apport">
+    <div class="sec-head"><h2 id="apport">Ce que j'apporte à une équipe</h2></div>
+    <div class="trio">
+      <div><h3>Je connais le métier derrière les chiffres</h3><p>Rendements, fertilisation, analyses de sol, programmes d'aide : je parle la langue des agronomes, des producteurs et des bailleurs, et je repère une donnée aberrante avant qu'elle n'arrive dans un rapport.</p></div>
+      <div><h3>Des modèles qui tiennent dans le temps</h3><p>Modèles en étoile, Power Query paramétré, sources actualisables, mesures DAX documentées, contrôle de qualité intégré au chargement. Le rapport survit à son auteur.</p></div>
+      <div><h3>Des indicateurs qu'on utilise vraiment</h3><p>Je pars de la décision à prendre, pas du graphique. Un indicateur entre dans un tableau de bord seulement s'il change ce que quelqu'un fera lundi matin.</p></div>
+    </div>
+  </section>
+</div>
+
+<main id="etudes">
+<div class="wrap">
+
+  <!-- 01 Agro -->
+  <article class="case" id="rendements" aria-labelledby="c1">
+    <div class="plot"><span class="tag">Étude 01</span><span>Agronomie · Statistique Canada</span></div>
+    <h2 id="c1">Combien de grains le Québec laisse-t-il au champ face à l'Ontario?</h2>
+    <p class="q">Question d'affaires : pour un conseiller ou un acheteur de grains, quelles cultures offrent le plus grand potentiel de gain de rendement au Québec, et lesquelles sont limitées par le climat plutôt que par la régie?</p>
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head">
+          <h3 id="c1-title">Rendement moyen 2026 (t/ha)</h3>
+          <div class="seg" role="group" aria-label="Indicateur">
+            <button type="button" aria-pressed="true" data-m="rdt">Rendement</button>
+            <button type="button" aria-pressed="false" data-m="gap">Écart de production</button>
+          </div>
+        </div>
+        <div class="legend" id="c1-legend"></div>
+        <svg class="chart" id="c1-chart" viewBox="0 0 640 330" role="img" aria-labelledby="c1-title"></svg>
+        <p class="src">Source : Statistique Canada, tableau 32-10-0359-01, estimations du 16 septembre 2026 (relayées par les Producteurs de grains du Québec). Écart de production = (rendement Ontario − rendement Québec) × superficie ensemencée au Québec.</p>
+      </div>
+      <div class="side">
+        <dl>
+          <div><dt>Données</dt><dd>Superficies ensemencées, rendements et production de 6 cultures pour le Québec, l'Ontario et le Canada.</dd></div>
+          <div><dt>Méthode</dt><dd>Table de faits culture × territoire, mesure d'écart de rendement et scénario « rendement ontarien » appliqué aux superficies québécoises.</dd></div>
+          <div><dt>Lecture d'agronome</dt><dd>L'écart du maïs et du soya s'explique en bonne partie par les unités thermiques maïs (UTM) plus faibles au Québec. L'écart du blé (3,55 contre 6,24 t/ha) tient surtout à la part de blé de printemps, moins productif que le blé d'automne dominant en Ontario : c'est là que la régie et le choix variétal pèsent le plus.</dd></div>
+          <div><dt>Outils</dt><dd class="chips"><span class="chip">Power Query</span><span class="chip">DAX</span><span class="chip">Power BI</span></dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="finding" id="c1-find"></div>
+  </article>
+
+  <!-- 02 Sillonia -->
+  <article class="case" id="sillonia" aria-labelledby="c2">
+    <div class="plot"><span class="tag feat">Projet phare</span><span>Stage BI · SMARTIADEV · 2026</span></div>
+    <h2 id="c2">Sillonia : une plateforme de données pour les agronomes-conseils</h2>
+    <p class="q">Question d'affaires : comment un club-conseil peut-il centraliser analyses de sol, rendements et dossiers d'aide financière, prévoir le rendement des parcelles et préparer les demandes Prime-Vert sans ressaisie?</p>
+    <div class="panel">
+      <div class="panel-head"><h3>Architecture de la solution</h3></div>
+      <div class="arch">
+        <div><b>Stockage</b>PostgreSQL et PostGIS : parcelles géoréférencées, analyses, historique</div>
+        <div><b>Services</b>API Python (FastAPI) et moteur de règles Prime-Vert</div>
+        <div><b>Terrain</b>Application web utilisable hors ligne au champ</div>
+        <div><b>Modèle</b>Prédiction du rendement par gradient boosting (scikit-learn)</div>
+        <div><b>Restitution</b>Tableaux de bord Power BI et rapports PDF</div>
+      </div>
+    </div>
+    <div class="finding">
+      <div><b>Validation honnête</b><span>Le modèle de rendement est validé en retirant une année entière, comparé à la moyenne historique de la parcelle.</span></div>
+      <div><b class="num">140+ tests</b><span>Le moteur de règles Prime-Vert est couvert par des tests automatisés exécutés à chaque modification (GitHub Actions).</span></div>
+      <div><b>Indicateurs réconciliés</b><span>Les totaux des tableaux de bord sont vérifiés automatiquement contre l'entrepôt avant diffusion.</span></div>
+    </div>
+    <p class="src"><a href="https://seguy-fotazou.github.io/sillonia">Ouvrir la démo publique de Sillonia</a></p>
+  </article>
+
+  <!-- 03 Marché du travail -->
+  <article class="case" id="emploi" aria-labelledby="c3">
+    <div class="plot"><span class="tag">Étude 02</span><span>Emploi · Ministère de l'Emploi du Québec</span></div>
+    <h2 id="c3">Quels métiers manqueront de bras au Québec d'ici 2029?</h2>
+    <p class="q">Question d'affaires : pour un service de ressources humaines ou un organisme de formation, où concentrer le recrutement et les programmes de formation au cours des trois prochaines années?</p>
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head">
+          <h3 id="c3-title">Diagnostic 2029 par grand domaine (part des professions)</h3>
+        </div>
+        <div class="legend" id="c3-legend"></div>
+        <svg class="chart" id="c3-chart" viewBox="0 0 640 400" role="img" aria-labelledby="c3-title"></svg>
+        <p class="src">Source : diagnostics de l'état d'équilibre du marché du travail 2026 et 2029, 516 professions (CNP 2021). Les 83 professions sans diagnostic publié sont exclues.</p>
+      </div>
+      <div class="side">
+        <dl>
+          <div><dt>Données</dt><dd>516 professions, deux horizons (2026, 2029), grand domaine et niveau de formation (TEER).</dd></div>
+          <div><dt>Modèle</dt><dd>Modèle en étoile : faits Professions, dimensions Diagnostic (ordonnée), Grand domaine et TEER. Relation active sur 2029, inactive sur 2026 activée par USERELATIONSHIP.</dd></div>
+          <div><dt>Qualité</dt><dd>Contrôle du nombre de lignes au chargement (516 attendues), cellules vides converties en null avant le typage.</dd></div>
+          <div><dt>Outils</dt><dd class="chips"><span class="chip">Power Query</span><span class="chip">15 mesures DAX</span><span class="chip">Titre dynamique</span></dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="finding" id="c3-find"></div>
+    <details>
+      <summary>Les 16 professions dont le diagnostic se resserre d'ici 2029</summary>
+      <ul class="list" id="c3-list" style="padding:0 16px 16px 34px"></ul>
+    </details>
+  </article>
+
+  <!-- 04 RBQ -->
+  <article class="case" id="rbq" aria-labelledby="c4">
+    <div class="plot"><span class="tag">Étude 03</span><span>Construction · Régie du bâtiment du Québec</span></div>
+    <h2 id="c4">Dans quels créneaux chaque région se spécialise-t-elle?</h2>
+    <p class="q">Question d'affaires : pour un fournisseur de matériaux ou une association d'entrepreneurs, quelle région offre une concentration inhabituelle d'entrepreneurs dans un créneau donné?</p>
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head">
+          <h3 id="c4-title">Indice de spécialisation, 8 sous-catégories les plus marquées</h3>
+          <label class="sr" for="c4-reg" style="position:absolute;left:-9999px">Région</label>
+          <select id="c4-reg"></select>
+        </div>
+        <svg class="chart" id="c4-chart" viewBox="0 0 640 330" role="img" aria-labelledby="c4-title"></svg>
+        <p class="src">Indice = part de la sous-catégorie dans la région ÷ part au Québec. 1,00 = moyenne québécoise. Sous-catégories d'au moins 10 licences. Source : licences actives de la RBQ, Données Québec (CC-BY 4.0), lues directement par l'API.</p>
+      </div>
+      <div class="side">
+        <dl>
+          <div><dt>Données</dt><dd>≈ 935 000 lignes (licence × sous-catégorie), actualisées chaque jour par Données Québec.</dd></div>
+          <div><dt>Gouvernance</dt><dd>Courriels, téléphones, adresses et noms retirés dès la première étape de Power Query (Loi 25).</dd></div>
+          <div><dt>Modèle</dt><dd>Fait licence × sous-catégorie, dimensions Licence, Région, Sous-catégorie et Date (calendrier complet pour l'intelligence temporelle).</dd></div>
+          <div><dt>Outils</dt><dd class="chips"><span class="chip">Web.Contents</span><span class="chip">Modèle en étoile</span><span class="chip">SAMEPERIODLASTYEAR</span></dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:24px">
+      <div class="panel-head"><h3 id="c4b-title">Licences encore actives selon l'année de délivrance, Québec</h3></div>
+      <svg class="chart" id="c4b-chart" viewBox="0 0 960 240" role="img" aria-labelledby="c4b-title"></svg>
+    </div>
+    <div class="finding" id="c4-find"></div>
+    <details>
+      <summary>Extrait DAX : indice de spécialisation</summary>
+<pre>Part sous-catégorie (région) =
+DIVIDE ( [Nb entrepreneurs],
+         CALCULATE ( [Nb entrepreneurs], REMOVEFILTERS ( Dim_SousCategorie ) ) )
+
+Part sous-catégorie (Québec) =
+CALCULATE ( [Part sous-catégorie (région)], REMOVEFILTERS ( Dim_Region ) )
+
+Indice de spécialisation =
+DIVIDE ( [Part sous-catégorie (région)], [Part sous-catégorie (Québec)] )</pre>
+    </details>
+  </article>
+
+</div>
+</main>
+
+<div class="wrap">
+  <section class="block" id="parcours" aria-labelledby="h-parcours">
+    <div class="sec-head"><h2 id="h-parcours">Parcours</h2><p>Du terrain africain aux tableaux de bord québécois : la même exigence de données propres.</p></div>
+    <div class="timeline">
+      <div class="tl"><div class="when">2025 – auj.</div><div><h3>Analyste et gestionnaire de données · Ferti-Conseil Rive-Sud</h3><p>Données agroenvironnementales (analyses de sol, rendements, plans de fertilisation), tableaux de bord pour les agronomes-conseils, automatisation de la préparation des données.</p></div></div>
+      <div class="tl"><div class="when">2026</div><div><h3>Stagiaire BI · SMARTIADEV, projet Sillonia</h3><p>Entrepôt BI, Power BI, PostgreSQL et PostGIS, FastAPI, prédiction du rendement, moteur de règles Prime-Vert.</p></div></div>
+      <div class="tl"><div class="when">2019 – 2023</div><div><h3>Analyste de données · ICRAF (Centre international de recherche en agroforesterie)</h3><p>Enquêtes et essais terrain, bases de données de projets, analyses statistiques en R, indicateurs de suivi et rapports pour partenaires et bailleurs.</p></div></div>
+      <div class="tl"><div class="when">2018 – 2019</div><div><h3>Analyste de données terrain et assurance qualité · Croix-Rouge française</h3><p>Supervision de la collecte, contrôle qualité (doublons, incohérences), statistiques et rapports de suivi.</p></div></div>
+      <div class="tl"><div class="when">2017 – 2018</div><div><h3>Assistant de recherche · CIRAD</h3><p>Essais expérimentaux, collecte au champ et en laboratoire, premières analyses.</p></div></div>
+      <div class="tl"><div class="when">Déc. 2026</div><div><h3>AEC en intelligence d'affaires · Collège de Bois-de-Boulogne</h3><p>SSIS, SSAS, modèles en étoile et en flocon, Power BI. Certification PL-300 en préparation (janvier 2027).</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-skills">
+    <div class="sec-head"><h2 id="h-skills">Compétences</h2></div>
+    <div class="skills">
+      <div><h3>Power BI</h3><p>DAX, Power Query (M), modélisation en étoile, sécurité au niveau des lignes, thèmes et rapports paramétrés</p></div>
+      <div><h3>Bases de données et ETL</h3><p>SQL Server, PostgreSQL et PostGIS, SSIS, SSAS tabulaire et multidimensionnel</p></div>
+      <div><h3>Programmation et modélisation</h3><p>Python (pandas, scikit-learn, FastAPI), R (statistiques, régressions, ggplot2)</p></div>
+      <div><h3>Domaines</h3><p>Agronomie et fertilisation, agroenvironnement, suivi-évaluation de projets, programmes d'aide (Prime-Vert)</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="h-contact">
+    <h2 id="h-contact">Parlons de vos données.</h2>
+    <p>Disponible pour un poste d'analyste BI ou de données au Québec (Chaudière-Appalaches, Capitale-Nationale, hybride ou télétravail) et pour des mandats de consultation en agriculture et en suivi-évaluation.</p>
+    <p><span class="addr" id="mail">eebouenoh@gmail.com</span><button class="copy" type="button" id="copy">Copier l'adresse</button></p>
+    <p><a href="https://www.linkedin.com/in/seguy-enock-agr-m-sc-b6339826">Profil LinkedIn</a> · <a href="https://seguy-fotazou.github.io/sillonia">Démo Sillonia</a></p>
+  </section>
+</div>
+
+<script>
+const DATA = {"p1": {"domaines": [{"d": "Santé", "n": 39, "Déficit": 14, "Léger déficit": 13, "Équilibre": 12, "Léger surplus": 0}, {"d": "Ressources naturelles, agriculture et production connexe", "n": 19, "Déficit": 6, "Léger déficit": 7, "Équilibre": 6, "Léger surplus": 0}, {"d": "Fabrication et services d'utilité publique", "n": 57, "Déficit": 1, "Léger déficit": 33, "Équilibre": 23, "Léger surplus": 0}, {"d": "Sciences naturelles et appliquées", "n": 62, "Déficit": 2, "Léger déficit": 33, "Équilibre": 27, "Léger surplus": 0}, {"d": "Métiers, transport et machinerie", "n": 83, "Déficit": 7, "Léger déficit": 39, "Équilibre": 36, "Léger surplus": 1}, {"d": "Vente et services", "n": 54, "Déficit": 0, "Léger déficit": 19, "Équilibre": 34, "Léger surplus": 1}, {"d": "Enseignement, droit et services sociaux, communautaires et gouvernementaux", "n": 37, "Déficit": 6, "Léger déficit": 6, "Équilibre": 24, "Léger surplus": 1}, {"d": "Affaires, finance et administration", "n": 59, "Déficit": 0, "Léger déficit": 18, "Équilibre": 37, "Léger surplus": 4}, {"d": "Arts, culture, sports et loisirs", "n": 23, "Déficit": 0, "Léger déficit": 2, "Équilibre": 18, "Léger surplus": 3}], "n_pub": 433, "def29": 47.6, "def26": 44.1, "resserre": 16, "detend": 5, "resserre_list": [["Développeurs/développeuses et programmeurs/programmeuses de systèmes informatiques", "Équilibre", "Léger déficit"], ["Technologues et techniciens/techniciennes en sciences forestières", "Équilibre", "Léger déficit"], ["Monteurs/monteuses de lignes électriques et de câbles", "Équilibre", "Léger déficit"], ["Ébénistes", "Équilibre", "Léger déficit"], ["Calorifugeurs/calorifugeuses", "Équilibre", "Léger déficit"], ["Surveillants/surveillantes de l'exploitation forestière", "Équilibre", "Léger déficit"], ["Opérateurs/opératrices de scies à chaîne et d'engins de débardage", "Équilibre", "Léger déficit"], ["Ouvriers/ouvrières en sylviculture et en exploitation forestière", "Équilibre", "Léger déficit"], ["Manceuvres de l'exploitation forestière", "Équilibre", "Léger déficit"], ["Surveillants/surveillantes dans la transformation des produits forestiers", "Équilibre", "Léger déficit"], ["Ouvriers/ouvrières de fonderies", "Équilibre", "Léger déficit"], ["Opérateurs/opératrices de machines à scier dans les scieries", "Équilibre", "Léger déficit"], ["Opérateurs/opératrices de machines à travailler le bois", "Équilibre", "Léger déficit"], ["Monteurs/monteuses, finisseurs/finisseuses, restaurateurs et contrôleurs/contrôleuses de meubles et d'accessoires", "Équilibre", "Léger déficit"], ["Monteurs/monteuses et contrôleurs/contrôleuses d'autres produits en bois", "Équilibre", "Léger déficit"], ["Manœuvres dans le traitement des pâtes et papiers et la transformation du bois", "Équilibre", "Léger déficit"]]}, "p2": {"annees": [[2000, 402], [2001, 413], [2002, 456], [2003, 525], [2004, 627], [2005, 682], [2006, 660], [2007, 701], [2008, 719], [2009, 778], [2010, 1080], [2011, 1225], [2012, 1467], [2013, 1509], [2014, 1635], [2015, 1592], [2016, 1755], [2017, 1867], [2018, 2137], [2019, 2392], [2020, 1898], [2021, 2949], [2022, 3762], [2023, 4431], [2024, 3921], [2025, 4623], [2026, 5174]], "total": 54592, "depuis2021": 24860, "regions": {"Abitibi-Témiscamingue": [["Propane", 2.41, 17], ["Systèmes d'assainissement autonome", 2.23, 108], ["Systèmes de brûleurs à l'huile", 2.17, 21], ["Pieux et fondations spéciales", 2.09, 33], ["Ouvrages de captage d'eau non forés", 2.08, 77], ["Routes et canalisation", 2.02, 76], ["Sautage", 1.99, 17], ["Structures de béton", 1.98, 46]], "Bas-Saint-Laurent": [["Systèmes de pompage des eaux souterraines", 3.5, 29], ["Installation d'équipement pétrolier", 2.45, 16], ["Systèmes de brûleurs à l'huile", 2.39, 33], ["Puits forés", 2.34, 16], ["Systèmes d'extinction d'incendie", 2.19, 16], ["Ouvrages de captage d'eau non forés", 2.17, 115], ["Propane", 2.08, 21], ["Structures de béton", 1.99, 66]], "Capitale-Nationale": [["Installation d'équipement pétrolier", 1.63, 49], ["Structures d'ouvrages de génie civil", 1.62, 194], ["Systèmes de pompage des eaux souterraines", 1.58, 60], ["Ouvrages de génie civil immergés", 1.52, 118], ["Puits forés", 1.46, 46], ["Télécommunication, transport, transformation et distribution d'énergie électrique", 1.33, 109], ["Ascenseurs et monte-charges", 1.31, 25], ["Structures de béton", 1.3, 198]], "Centre-du-Québec": [["Ouvrages de captage d'eau non forés", 1.45, 145], ["Structures de béton", 1.41, 88], ["Charpentes de bois", 1.34, 309], ["Systèmes d'assainissement autonome", 1.32, 173], ["Bâtiments résidentiels neufs visés par un plan de garantie, classe I", 1.21, 97], ["Puits forés", 1.16, 15], ["Propane", 1.15, 22], ["Systèmes de chauffage hydronique", 1.15, 37]], "Chaudière-Appalaches": [["Puits forés", 1.77, 46], ["Remontées mécaniques", 1.75, 23], ["Protection contre la foudre", 1.73, 77], ["Systèmes de pompage des eaux souterraines", 1.65, 52], ["Systèmes localisés d'extinction incendie", 1.58, 86], ["Autres types d'appareils élévateurs", 1.57, 22], ["Ouvrages de captage d'eau non forés", 1.49, 300], ["Appareils élévateurs pour personnes handicapées", 1.48, 24]], "Côte-Nord": [["Ouvrages de génie civil immergés", 5.68, 38], ["Télécommunication, transport, transformation et distribution d'énergie électrique", 5.24, 37], ["Systèmes d'extinction d'incendie", 5.19, 15], ["Sautage", 4.96, 24], ["Structures d'ouvrages de génie civil", 4.66, 48], ["Installation d'équipement pétrolier", 4.64, 12], ["Puits forés", 4.43, 12], ["Systèmes d'alarme incendie", 4.16, 15]], "Estrie": [["Charpentes de bois", 1.62, 715], ["Bâtiments résidentiels neufs visés par un plan de garantie, classe I", 1.49, 226], ["Systèmes de pompage des eaux souterraines", 1.48, 44], ["Bâtiments résidentiels neufs visés par un plan de garantie, classe II", 1.32, 164], ["Systèmes de chauffage hydronique", 1.17, 72], ["Propane", 1.1, 40], ["Systèmes de brûleurs à l'huile", 1.09, 54], ["Ventilation résidentielle", 1.07, 398]], "Gaspésie--Îles-de-la-Madeleine": [["Ouvrages de génie civil immergés", 3.54, 27], ["Structures d'ouvrages de génie civil", 2.81, 33], ["Ouvrages de captage d'eau non forés", 2.3, 55], ["Structures de béton", 2.27, 34], ["Télécommunication, transport, transformation et distribution d'énergie électrique", 2.24, 18], ["Routes et canalisation", 2.15, 52], ["Systèmes d'assainissement autonome", 2.11, 66], ["Systèmes localisés d'extinction incendie", 1.85, 12]], "Lanaudière": [["Charpentes de bois", 1.18, 886], ["Intercommunication, téléphonie et surveillance", 1.05, 4330], ["Installations spéciales ou préfabriquées", 1.04, 4345], ["Isolation, étanchéité, couvertures et revêtement extérieur", 1.03, 4730], ["Armoires et comptoirs usinés", 1.03, 4571], ["Ouvrages métalliques", 1.03, 4645], ["Petits ouvrages de béton", 1.03, 4509], ["Maçonnerie non structurale, marbre et céramique", 1.03, 4502]], "Laurentides": [["Bâtiments résidentiels neufs visés par un plan de garantie, classe II", 1.15, 301], ["Bâtiments résidentiels neufs visés par un plan de garantie, classe I", 1.11, 357], ["Sautage", 1.06, 98], ["Mécanique du bâtiment", 1.05, 10], ["Maçonnerie non structurale, marbre et céramique", 1.02, 5476], ["Armoires et comptoirs usinés", 1.02, 5581], ["Intercommunication, téléphonie et surveillance", 1.02, 5184], ["Travaux de bois et plastique", 1.02, 5672]], "Laval": [["Autres types d'appareils élévateurs", 2.49, 29], ["Appareils élévateurs pour personnes handicapées", 2.44, 33], ["Ascenseurs et monte-charges", 2.43, 32], ["Remontées mécaniques", 2.11, 23], ["Systèmes d'extinction d'incendie", 1.69, 39], ["Réfrigération", 1.66, 146], ["Électricité", 1.65, 356], ["Ventilation", 1.57, 128]], "Mauricie": [["Systèmes d'alarme incendie", 1.47, 22], ["Puits forés", 1.42, 16], ["Systèmes de brûleurs à l'huile", 1.36, 31], ["Routes et canalisation", 1.35, 119], ["Systèmes de chauffage hydronique", 1.32, 37], ["Systèmes d'assainissement autonome", 1.32, 150], ["Installation d'équipement pétrolier", 1.3, 14], ["Structures d'ouvrages de génie civil", 1.29, 55]], "Montréal": [["Autres types d'appareils élévateurs", 1.89, 51], ["Remontées mécaniques", 1.86, 47], ["Systèmes d'alarme incendie", 1.84, 123], ["Systèmes localisés d'extinction incendie", 1.61, 169], ["Protection contre la foudre", 1.6, 138], ["Systèmes d'extinction d'incendie", 1.59, 85], ["Installation d'équipement pétrolier", 1.57, 75], ["Ascenseurs et monte-charges", 1.54, 47]], "Montérégie": [["Mécanique du bâtiment", 1.2, 17], ["Propane", 1.18, 135], ["Petits systèmes de réfrigération", 1.16, 148], ["Structures de maçonnerie", 1.08, 361], ["Systèmes de chauffage à air pulsé", 1.08, 214], ["Systèmes de brûleurs au gaz naturel", 1.07, 242], ["Bâtiments résidentiels neufs visés par un plan de garantie, classe II", 1.03, 404], ["Petits bâtiments", 1.03, 3185]], "Nord-du-Québec": [["Ouvrages de génie civil immergés", 6.39, 15], ["Télécommunication, transport, transformation et distribution d'énergie électrique", 5.65, 14], ["Structures d'ouvrages de génie civil", 5.25, 19], ["Routes et canalisation", 5.09, 38], ["Structures de béton", 3.47, 16], ["Ouvrages de captage d'eau non forés", 2.31, 17], ["Systèmes de chauffage localisé à combustible solide", 1.87, 25], ["Systèmes d'assainissement autonome", 1.77, 17]], "Outaouais": [["Systèmes d'assainissement autonome", 1.5, 251], ["Ouvrages de captage d'eau non forés", 1.28, 163], ["Systèmes de chauffage à air pulsé", 1.19, 50], ["Systèmes de brûleurs au gaz naturel", 1.14, 55], ["Bâtiments de tout genre", 1.12, 910], ["Bâtiments résidentiels neufs visés par un plan de garantie, classe I", 1.09, 111], ["Systèmes de chauffage localisé à combustible solide", 1.08, 250], ["Plomberie", 1.07, 102]], "Saguenay--Lac-Saint-Jean": [["Structures d'ouvrages de génie civil", 2.66, 105], ["Installation d'équipement pétrolier", 2.52, 25], ["Routes et canalisation", 2.36, 192], ["Systèmes d'extinction d'incendie", 2.35, 26], ["Télécommunication, transport, transformation et distribution d'énergie électrique", 2.18, 59], ["Ouvrages de génie civil immergés", 2.18, 56], ["Structures de béton", 1.87, 94], ["Systèmes d'assainissement autonome", 1.85, 194]]}}};
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt = (v,d=0) => v.toLocaleString('fr-CA',{minimumFractionDigits:d,maximumFractionDigits:d});
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+function clear(s){while(s.firstChild)s.removeChild(s.firstChild);}
+function wrapText(t,max){const w=t.split(' ');const out=[];let cur='';for(const x of w){if((cur+' '+x).trim().length>max&&cur){out.push(cur);cur=x;}else cur=(cur+' '+x).trim();}if(cur)out.push(cur);return out;}
+
+/* ---------- Étude 01 : rendements ---------- */
+const CROPS=[
+ {c:'Maïs-grain',qc:9.79,on:11.69,ca:10.61,ha:364400},
+ {c:'Soya',qc:3.22,on:3.50,ca:3.12,ha:424200},
+ {c:'Blé',qc:3.55,on:6.24,ca:3.61,ha:112000},
+ {c:'Orge',qc:2.91,on:3.61,ca:3.92,ha:23700},
+ {c:'Avoine',qc:2.60,on:3.33,ca:3.61,ha:52600},
+ {c:'Canola',qc:2.29,on:2.85,ca:2.34,ha:10600}];
+CROPS.forEach(r=>r.gap=Math.max(0,(r.on-r.qc)*r.ha));
+let c1mode='rdt';
+function drawC1(){
+  const s=document.getElementById('c1-chart');clear(s);
+  const L=110,R=24,T=10,W=640,H=330,rowH=(H-T-30)/CROPS.length;
+  const lg=document.getElementById('c1-legend');
+  if(c1mode==='rdt'){
+    document.getElementById('c1-title').textContent='Rendement moyen 2026 (t/ha)';
+    const series=[['qc','Québec',css('--accent')],['on','Ontario',css('--amber')],['ca','Canada',css('--mist')]];
+    lg.innerHTML=series.map(x=>`<span><i style="background:${x[2]}"></i>${x[1]}</span>`).join('');
+    const max=12,sx=v=>L+(W-L-R)*v/max;
+    for(let t=0;t<=12;t+=3){el('line',{x1:sx(t),x2:sx(t),y1:T,y2:H-26,stroke:css('--line')},s);el('text',{x:sx(t),y:H-8,'text-anchor':'middle','font-size':12},s,t);}
+    CROPS.forEach((r,i)=>{const y0=T+i*rowH+6,bh=(rowH-14)/3;
+      el('text',{x:L-10,y:y0+bh*1.5+4,'text-anchor':'end','font-size':13.5,class:'lab'},s,r.c);
+      series.forEach((sr,j)=>{const v=r[sr[0]];const b=el('rect',{x:L,y:y0+j*bh,width:sx(v)-L,height:bh-2,fill:sr[2],rx:2},s);el('title',{},b,`${sr[1]} : ${fmt(v,2)} t/ha`);
+        if(j===0)el('text',{x:sx(v)+5,y:y0+j*bh+bh-4,'font-size':11.5,class:'lab'},s,fmt(v,2));});
+    });
+  } else {
+    document.getElementById('c1-title').textContent='Production supplémentaire si le Québec atteignait le rendement ontarien (milliers de t)';
+    lg.innerHTML=`<span><i style="background:${css('--signal')}"></i>Écart, superficies 2026 du Québec</span>`;
+    const rows=[...CROPS].sort((a,b)=>b.gap-a.gap);const max=800000,sx=v=>L+(W-L-R-40)*v/max;
+    for(let t=0;t<=800000;t+=200000){el('line',{x1:sx(t),x2:sx(t),y1:T,y2:H-26,stroke:css('--line')},s);el('text',{x:sx(t),y:H-8,'text-anchor':'middle','font-size':12},s,fmt(t/1000));}
+    rows.forEach((r,i)=>{const y=T+i*rowH+8,bh=rowH-18;
+      el('text',{x:L-10,y:y+bh/2+5,'text-anchor':'end','font-size':13.5,class:'lab'},s,r.c);
+      const b=el('rect',{x:L,y,width:Math.max(1,sx(r.gap)-L),height:bh,fill:css('--signal'),rx:2},s);el('title',{},b,`${r.c} : ${fmt(r.gap/1000)} milliers de t`);
+      el('text',{x:sx(r.gap)+6,y:y+bh/2+5,'font-size':12.5,class:'lab'},s,fmt(r.gap/1000)+' kt');});
+  }
+}
+document.querySelectorAll('#rendements .seg button').forEach(b=>b.addEventListener('click',()=>{c1mode=b.dataset.m;document.querySelectorAll('#rendements .seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawC1();}));
+const totGap=CROPS.reduce((a,r)=>a+r.gap,0);
+const corn=CROPS[0];
+document.getElementById('c1-find').innerHTML=`
+ <div><b class="num">${fmt(totGap/1e6,1).replace(',',',')} Mt</b><span>de grains supplémentaires si les 6 cultures atteignaient le rendement ontarien sur les superficies québécoises de 2026.</span></div>
+ <div><b class="num">${fmt(corn.gap/totGap*100,0)}&nbsp;%</b><span>de cet écart vient du maïs-grain (${fmt(corn.on-corn.qc,2)} t/ha d'écart sur ${fmt(corn.ha)} ha).</span></div>
+ <div><b class="num">${fmt(CROPS[2].qc/CROPS[2].on*100,0)}&nbsp;%</b><span>du rendement ontarien seulement pour le blé : l'écart relatif le plus grand, et le plus sensible à la régie.</span></div>`;
+
+/* ---------- Étude 02 : marché du travail ---------- */
+const P1=DATA.p1;
+const DIAG=[['Déficit','--signal'],['Léger déficit','--amber'],['Équilibre','--mist'],['Léger surplus','--blue']];
+function drawC3(){
+  const s=document.getElementById('c3-chart');clear(s);
+  document.getElementById('c3-legend').innerHTML=DIAG.map(d=>`<span><i style="background:${css(d[1])}"></i>${d[0]}</span>`).join('');
+  const L=210,R=40,T=6,W=640,H=400,rows=P1.domaines,rowH=(H-T-24)/rows.length,sx=v=>L+(W-L-R)*v;
+  [0,.25,.5,.75,1].forEach(t=>{el('line',{x1:sx(t),x2:sx(t),y1:T,y2:H-22,stroke:css('--line')},s);el('text',{x:sx(t),y:H-6,'text-anchor':'middle','font-size':12},s,fmt(t*100)+' %');});
+  rows.forEach((r,i)=>{const y=T+i*rowH+5,bh=rowH-10;let acc=0;
+    const isAg=r.d.startsWith('Ressources');
+    const lines=wrapText(r.d==='Enseignement, droit et services sociaux, communautaires et gouvernementaux'?'Enseignement, droit et services sociaux':(isAg?'Ressources naturelles et agriculture':r.d),28);
+    lines.forEach((ln,k)=>el('text',{x:L-10,y:y+bh/2+4+(k-(lines.length-1)/2)*14,'text-anchor':'end','font-size':12.5,class:'lab','font-weight':isAg?600:400},s,ln));
+    DIAG.forEach(([k,c])=>{const v=r[k]/r.n;if(!v)return;const b=el('rect',{x:sx(acc),y,width:sx(acc+v)-sx(acc),height:bh,fill:css(c)},s);el('title',{},b,`${r.d} · ${k} : ${r[k]} professions (${fmt(v*100)} %)`);acc+=v;});
+    const def=(r['Déficit']+r['Léger déficit'])/r.n;
+    el('text',{x:W-R+6,y:y+bh/2+4,'font-size':12,class:'lab'},s,fmt(def*100)+' %');
+    if(isAg)el('rect',{x:L-2,y:y-2,width:W-L-R+4,height:bh+4,fill:'none',stroke:css('--ink'),'stroke-width':1.5,rx:2},s);
+  });
+}
+const ag=P1.domaines.find(d=>d.d.startsWith('Ressources'));
+document.getElementById('c3-find').innerHTML=`
+ <div><b class="num">${fmt(P1.def29,1)}&nbsp;%</b><span>des ${P1.n_pub} professions évaluées seront en déficit ou en léger déficit en 2029, contre ${fmt(P1.def26,1)}&nbsp;% en 2026.</span></div>
+ <div><b class="num">${fmt((ag['Déficit']+ag['Léger déficit'])/ag.n*100)}&nbsp;%</b><span>en ressources naturelles et agriculture : 2<sup>e</sup> domaine le plus en tension, juste derrière la santé. Manœuvres agricoles et ouvriers d'élevage sont en déficit.</span></div>
+ <div><b class="num">${P1.resserre} sur ${P1.resserre+P1.detend}</b><span>changements de diagnostic vont vers un resserrement, dont 12 dans la forêt, le bois et le meuble.</span></div>`;
+document.getElementById('c3-list').innerHTML=P1.resserre_list.map(r=>`<li>${r[0]}</li>`).join('');
+
+/* ---------- Étude 03 : RBQ ---------- */
+const P2=DATA.p2;
+const sel=document.getElementById('c4-reg');
+Object.keys(P2.regions).forEach(r=>{const o=document.createElement('option');o.value=r;o.textContent=r.replace('--',' – ');if(r==='Chaudière-Appalaches')o.selected=true;sel.appendChild(o);});
+function drawC4(){
+  const s=document.getElementById('c4-chart');clear(s);
+  const rows=P2.regions[sel.value];const L=250,R=46,T=8,W=640,H=330,rowH=(H-T-28)/8;
+  const max=Math.max(2,Math.ceil(Math.max(...rows.map(r=>r[1]))*2)/2),sx=v=>L+(W-L-R)*v/max;
+  for(let t=0;t<=max;t+=0.5){el('line',{x1:sx(t),x2:sx(t),y1:T,y2:H-24,stroke:t===1?css('--ink'):css('--line'),'stroke-dasharray':t===1?'4 3':''},s);el('text',{x:sx(t),y:H-7,'text-anchor':'middle','font-size':12},s,fmt(t,1));}
+  rows.forEach((r,i)=>{const y=T+i*rowH+5,bh=rowH-10;
+    const lines=wrapText(r[0],34).slice(0,2);
+    lines.forEach((ln,k)=>el('text',{x:L-10,y:y+bh/2+4+(k-(lines.length-1)/2)*13.5,'text-anchor':'end','font-size':12.5,class:'lab'},s,ln));
+    const b=el('rect',{class:'bar',x:L,y,width:sx(r[1])-L,height:bh,fill:css('--accent'),rx:2},s);el('title',{},b,`${r[0]} : indice ${fmt(r[1],2)} (${r[2]} licences)`);
+    el('text',{x:sx(r[1])+6,y:y+bh/2+4,'font-size':12,class:'lab'},s,fmt(r[1],2));});
+}
+sel.addEventListener('change',drawC4);
+function drawC4b(){
+  const s=document.getElementById('c4b-chart');clear(s);
+  const pts=P2.annees,L=50,R=56,T=14,W=960,H=240,max=6000;
+  const sx=y=>L+(W-L-R)*(y-2000)/26,sy=v=>H-26-(H-26-T)*v/max;
+  for(let t=0;t<=max;t+=2000){el('line',{x1:L,x2:W-R,y1:sy(t),y2:sy(t),stroke:css('--line')},s);el('text',{x:L-8,y:sy(t)+4,'text-anchor':'end','font-size':12},s,fmt(t));}
+  [2000,2005,2010,2015,2020,2026].forEach(y=>el('text',{x:sx(y),y:H-6,'text-anchor':'middle','font-size':12},s,y));
+  const acc=css('--accent');
+  const d=pts.map((p,i)=>(i?'L':'M')+sx(p[0]).toFixed(1)+','+sy(p[1]).toFixed(1)).join(' ');
+  el('path',{d:d+` L${sx(2026)},${sy(0)} L${sx(2000)},${sy(0)} Z`,fill:acc,'fill-opacity':.12},s);
+  el('path',{d,fill:'none',stroke:acc,'stroke-width':2.5,'stroke-linejoin':'round'},s);
+  pts.forEach(p=>{const c=el('circle',{cx:sx(p[0]),cy:sy(p[1]),r:8,fill:'transparent'},s);el('title',{},c,`${p[0]} : ${fmt(p[1])} licences`);});
+  const last=pts[pts.length-1];el('circle',{cx:sx(last[0]),cy:sy(last[1]),r:4.5,fill:acc},s);
+  el('text',{x:sx(last[0])+8,y:sy(last[1])+4,'font-size':12.5,class:'lab','font-weight':600},s,fmt(last[1]));
+  const c20=pts.find(p=>p[0]===2020);el('text',{x:sx(2020),y:sy(c20[1])+20,'text-anchor':'middle','font-size':11.5},s,'2020 : pandémie');
+}
+const ca=P2.regions['Chaudière-Appalaches'];
+document.getElementById('c4-find').innerHTML=`
+ <div><b class="num">${fmt(P2.total)}</b><span>licences actives analysées, sans aucune donnée personnelle dans le modèle.</span></div>
+ <div><b class="num">${fmt(P2.depuis2021/P2.total*100)}&nbsp;%</b><span>de ces licences ont été délivrées depuis 2021 : la relève entrepreneuriale s'est fortement accélérée après la pandémie.</span></div>
+ <div><b class="num">× ${fmt(ca[0][1],2)}</b><span>pour les puits forés en Chaudière-Appalaches, au-dessus de la moyenne québécoise : un créneau rural lié à l'eau souterraine.</span></div>`;
+
+function drawAll(){drawC1();drawC3();drawC4();drawC4b();}
+drawAll();
+new MutationObserver(drawAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',drawAll);}catch(e){}
+document.getElementById('copy').addEventListener('click',async e=>{try{await navigator.clipboard.writeText('eebouenoh@gmail.com');e.target.textContent='Adresse copiée';}catch(err){e.target.textContent='Sélectionnez l\'adresse pour la copier';}});
+</script>
+</body>
+</html>
